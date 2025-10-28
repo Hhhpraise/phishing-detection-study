@@ -1,0 +1,41 @@
+{
+  "model_type": "sequential",
+  "layers": [
+    {
+      "type": "dense",
+      "name": "input_layer",
+      "input_dim": 5010,
+      "units": 512,
+      "activation": "relu",
+      "use_bias": true
+    },
+    {
+      "type": "dense",
+      "name": "hidden_layer_1",
+      "units": 256,
+      "activation": "relu",
+      "use_bias": true
+    },
+    {
+      "type": "dense",
+      "name": "hidden_layer_2",
+      "units": 128,
+      "activation": "relu",
+      "use_bias": true
+    },
+    {
+      "type": "dense",
+      "name": "hidden_layer_3",
+      "units": 64,
+      "activation": "relu",
+      "use_bias": true
+    },
+    {
+      "type": "dense",
+      "name": "output_layer",
+      "units": 2,
+      "activation": "linear",
+      "use_bias": true
+    }
+  ]
+}

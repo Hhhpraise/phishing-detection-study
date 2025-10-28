@@ -1,0 +1,32 @@
+PHISHGUARD - DATASET SUMMARY REPORT
+==================================================
+
+BASIC INFORMATION:
+- Total emails: 39,154
+- Number of features: 7
+- Dataset shape: (39154, 7)
+
+COLUMNS:
+- sender: object | Unique: 24578
+- receiver: object | Unique: 3693
+- date: object | Unique: 38658
+- subject: object | Unique: 15436
+- body: object | Unique: 39154
+- label: int64 | Unique: 2
+- urls: int64 | Unique: 2
+
+LABEL DISTRIBUTION:
+- Phishing Email: 21842 (55.78%)
+- Safe Email: 17312 (44.22%)
+
+TEXT STATISTICS:
+- Mean text length: 1611 chars
+- Median text length: 603 chars
+- Min text length: 22 chars
+- Max text length: 144051 chars
+- Mean word count: 208 words
+
+DATA QUALITY:
+- Missing values: 490
+- Duplicate rows: 0
+- Emails with URLs: 39154

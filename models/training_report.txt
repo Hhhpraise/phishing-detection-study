@@ -1,0 +1,33 @@
+PHISHGUARD - MODEL TRAINING REPORT
+==================================================
+
+Training completed: 2025-10-27 17:17:35
+Training time: 83.56 seconds
+
+MODEL ARCHITECTURE:
+  Input features: 5010
+  Hidden layers: [512, 256, 128, 64]
+  Total parameters: 2,740,097
+
+TRAINING PARAMETERS:
+  Batch size: 64
+  Learning rate: 0.001
+  Epochs trained: 6
+  Final epoch: 6
+
+FINAL PERFORMANCE:
+  Accuracy:  0.5579
+  Precision: 0.5579
+  Recall:    1.0000
+  F1-Score:  0.7162
+
+CONFUSION MATRIX:
+  True Negatives:  0
+  False Positives: 3462
+  False Negatives: 0
+  True Positives:  4369
+
+FEATURE INFORMATION:
+  TF-IDF features: 5,000
+  Engineered features: 10
+  Total features: 5010

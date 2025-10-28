@@ -1,0 +1,47 @@
+PHISHGUARD - TEST EMAIL SELECTION REPORT
+============================================================
+
+SELECTION SUMMARY:
+  Total emails selected: 20
+  Safe emails: 10
+  Phishing emails: 10
+
+DIFFICULTY DISTRIBUTION:
+  easy: 16 emails
+  medium: 2 emails
+  hard: 2 emails
+
+AI PERFORMANCE ON SELECTED SET:
+  Accuracy: 90.00%
+  Correct predictions: 18/20
+
+TEXT CHARACTERISTICS:
+  Average length: 818 characters
+  Average words: 146 words
+  Length range: 67 - 6415 characters
+
+SAMPLE EMAILS:
+  Email 1:
+    ID: email_001
+    Ground truth: safe
+    AI prediction: safe (confidence: 1.000)
+    Difficulty: easy
+    Correct: True
+    Preview: re python dev unscriptable? ruby undefined method for fixnum nomethoderror i think it will be natura...
+
+  Email 2:
+    ID: email_004
+    Ground truth: safe
+    AI prediction: safe (confidence: 0.999)
+    Difficulty: easy
+    Correct: True
+    Preview: re python using range on fri apr at am nick coghlan wrote eh brain explosion from typing too late at...
+
+  Email 3:
+    ID: email_011
+    Ground truth: phishing
+    AI prediction: phishing (confidence: 1.000)
+    Difficulty: easy
+    Correct: True
+    Preview: best tapes for you! miss new york carrie tuker in celebrity e x videos URL PLACEHOLDER...
+

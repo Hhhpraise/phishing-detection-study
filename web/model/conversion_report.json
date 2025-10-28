@@ -1,0 +1,33 @@
+{
+  "conversion_date": "2025-10-27T13:49:35",
+  "source_model": "PyTorch ImprovedPhishingDetector",
+  "target_format": "TensorFlow.js",
+  "model_architecture": {
+    "input_size": 5010,
+    "hidden_layers": [
+      512,
+      256,
+      128,
+      64
+    ],
+    "output_classes": 2
+  },
+  "preprocessing_components": {
+    "vocabulary_size": 5000,
+    "engineered_features": 10,
+    "total_features": 5010
+  },
+  "files_generated": [
+    "model_architecture.json",
+    "model_weights.json",
+    "vocabulary.json",
+    "preprocessor.js",
+    "phishguard_model.js"
+  ],
+  "performance_metrics": {
+    "original_accuracy": 0.975,
+    "original_precision": 0.9858,
+    "original_recall": 0.9691,
+    "original_f1": 0.9774
+  }
+}

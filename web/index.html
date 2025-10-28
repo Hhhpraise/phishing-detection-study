@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishGuard - Human vs AI Phishing Detection Study</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.11.0/dist/tf.min.js"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="screen active">
+        <div class="loading-container">
+            <div class="cyber-spinner"></div>
+            <h2>Loading PhishGuard</h2>
+            <p>Initializing AI model and security protocols...</p>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <div id="loadingStatus">Loading model: 0%</div>
+        </div>
+    </div>
+
+    <!-- Landing Page -->
+    <div id="landingScreen" class="screen">
+        <div class="container">
+            <header class="hero">
+                <h1 class="cyber-title">PHISH<span class="accent">GUARD</span></h1>
+                <p class="subtitle">Human vs AI Phishing Detection Research Study</p>
+            </header>
+
+            <div class="info-cards">
+                <div class="card">
+                    <div class="card-icon">⏱️</div>
+                    <h3>Duration</h3>
+                    <p>15-20 minutes</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Task</h3>
+                    <p>Classify 15 emails as phishing or safe</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔬</div>
+                    <h3>Goal</h3>
+                    <p>Compare human and AI detection accuracy</p>
+                </div>
+            </div>
+
+            <div class="consent-section">
+                <h3>Research Consent</h3>
+                <div class="consent-text">
+                    <p>This study examines how humans and AI work together to detect phishing emails. Your participation will help advance cybersecurity research.</p>
+                    <ul>
+                        <li>✅ All responses are anonymous</li>
+                        <li>✅ You can stop at any time</li>
+                        <li>✅ No personal data collected</li>
+                        <li>✅ Research data stored securely</li>
+                    </ul>
+                </div>
+                <label class="checkbox-container">
+                    <input type="checkbox" id="consentCheckbox">
+                    <span class="checkmark"></span>
+                    I understand and agree to participate in this research study
+                </label>
+            </div>
+
+            <button id="startStudyBtn" class="btn-primary" disabled>Start Research Study</button>
+        </div>
+    </div>
+
+    <!-- Instructions Screen -->
+    <div id="instructionsScreen" class="screen">
+        <div class="container">
+            <h2>Study Instructions</h2>
+
+            <div class="instructions-content">
+                <div class="instruction-section">
+                    <h3>🎯 What You'll Do</h3>
+                    <p>You will review 15 emails and classify each as <span class="phishing-text">PHISHING</span> or <span class="safe-text">SAFE</span>.</p>
+                    <p>The study has <strong>three different test modes</strong> to compare different approaches.</p>
+                </div>
+
+                <div class="test-modes">
+                    <div class="mode-card">
+                        <div class="mode-header human-only">
+                            <h4>Mode 1: Human Only</h4>
+                        </div>
+                        <p>You make decisions without AI assistance</p>
+                        <ul>
+                            <li>Review email content</li>
+                            <li>Click Phishing or Safe</li>
+                            <li>Rate your confidence</li>
+                        </ul>
+                    </div>
+
+                    <div class="mode-card">
+                        <div class="mode-header ai-only">
+                            <h4>Mode 2: AI Only</h4>
+                        </div>
+                        <p>You decide first, then see AI prediction</p>
+                        <ul>
+                            <li>Make your decision</li>
+                            <li>See AI prediction after</li>
+                            <li>Option to change your mind</li>
+                        </ul>
+                    </div>
+
+                    <div class="mode-card">
+                        <div class="mode-header hybrid">
+                            <h4>Mode 3: Hybrid</h4>
+                        </div>
+                        <p>AI assistance shown before you decide</p>
+                        <ul>
+                            <li>See AI prediction immediately</li>
+                            <li>Make informed decision</li>
+                            <li>Note if AI influenced you</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tips-section">
+                    <h3>🔍 Phishing Detection Tips</h3>
+                    <div class="tips-grid">
+                        <div class="tip">
+                            <strong>Suspicious Links</strong>
+                            <p>Check if URLs match the sender</p>
+                        </div>
+                        <div class="tip">
+                            <strong>Urgent Language</strong>
+                            <p>"Immediate action required" often indicates phishing</p>
+                        </div>
+                        <div class="tip">
+                            <strong>Personal Information</strong>
+                            <p>Legitimate companies rarely ask for passwords via email</p>
+                        </div>
+                        <div class="tip">
+                            <strong>Grammar Errors</strong>
+                            <p>Poor spelling and grammar are red flags</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button id="beginTestingBtn" class="btn-primary">Begin Email Testing</button>
+        </div>
+    </div>
+
+    <!-- Test Interface -->
+    <div id="testScreen" class="screen">
+        <div class="test-container">
+            <!-- Progress Bar -->
+            <div class="progress-header">
+                <div class="progress-info">
+                    <span id="progressText">Email 1 of 15</span>
+                    <span id="modeIndicator" class="mode-indicator">Human Only</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill" style="width: 6.67%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email Display -->
+            <div class="email-container">
+                <div class="email-header">
+                    <div class="email-meta">
+                        <div class="email-from">
+                            <strong>From:</strong>
+                            <span id="emailFrom">security@example.com</span>
+                        </div>
+                        <div class="email-subject">
+                            <strong>Subject:</strong>
+                            <span id="emailSubject">Urgent: Your Account Requires Verification</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="email-body">
+                    <div id="emailContent" class="email-content">
+                        <!-- Email content will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Prediction Box (Hybrid Mode) -->
+            <div id="aiPredictionBox" class="ai-prediction-box hidden">
+                <div class="ai-header">
+                    <h4>🤖 AI Analysis</h4>
+                    <div class="confidence-badge" id="aiConfidenceBadge">85% confident</div>
+                </div>
+                <div class="ai-verdict">
+                    <span id="aiVerdict" class="verdict-text">PHISHING</span>
+                </div>
+                <div class="confidence-meter">
+                    <div class="confidence-fill" id="confidenceFill" style="width: 85%"></div>
+                </div>
+                <div class="ai-explanation">
+                    The AI detected suspicious URLs and urgent language patterns.
+                </div>
+            </div>
+
+            <!-- Decision Panel -->
+            <div class="decision-panel">
+                <div class="decision-buttons">
+                    <button id="phishingBtn" class="btn-phishing">
+                        🚨 PHISHING
+                    </button>
+                    <button id="safeBtn" class="btn-safe">
+                        ✅ SAFE
+                    </button>
+                </div>
+
+                <!-- Confidence Slider -->
+                <div class="confidence-section">
+                    <label for="confidenceSlider">How confident are you?</label>
+                    <div class="confidence-labels">
+                        <span>1 - Guess</span>
+                        <span>2 - Unsure</span>
+                        <span>3 - Somewhat</span>
+                        <span>4 - Confident</span>
+                        <span>5 - Very Sure</span>
+                    </div>
+                    <input type="range" id="confidenceSlider" min="1" max="5" value="3" class="slider">
+                    <div class="confidence-display">
+                        Confidence Level: <span id="confidenceValue">3</span>/5
+                    </div>
+                </div>
+
+                <!-- Mode-specific Questions -->
+                <div id="modeQuestions" class="mode-questions hidden">
+                    <!-- AI-only mode question -->
+                    <div id="aiOnlyQuestion" class="question hidden">
+                        <p>Would you change your mind based on the AI prediction?</p>
+                        <div class="question-buttons">
+                            <button class="btn-secondary" data-answer="no">No, stick with my decision</button>
+                            <button class="btn-secondary" data-answer="yes">Yes, change to AI's verdict</button>
+                        </div>
+                    </div>
+
+                    <!-- Hybrid mode question -->
+                    <div id="hybridQuestion" class="question hidden">
+                        <p>Did the AI prediction influence your decision?</p>
+                        <div class="question-buttons">
+                            <button class="btn-secondary" data-answer="no">No, I decided independently</button>
+                            <button class="btn-secondary" data-answer="yes">Yes, AI influenced me</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Confirm Button -->
+                <button id="confirmBtn" class="btn-confirm hidden">
+                    Confirm and Continue
+                </button>
+            </div>
+
+            <!-- Timer -->
+            <div class="timer-container">
+                <div class="timer">
+                    ⏱️ <span id="timerDisplay">0s</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Post-Test Survey -->
+    <div id="surveyScreen" class="screen">
+        <div class="container">
+            <h2>Post-Study Survey</h2>
+            <p>Please help us improve by answering a few questions.</p>
+
+            <form id="surveyForm" class="survey-form">
+                <div class="form-group">
+                    <label for="ageRange">Age Range</label>
+                    <select id="ageRange" required>
+                        <option value="">Select your age range</option>
+                        <option value="18-24">18-24</option>
+                        <option value="25-34">25-34</option>
+                        <option value="35-44">35-44</option>
+                        <option value="45-54">45-54</option>
+                        <option value="55-64">55-64</option>
+                        <option value="65+">65+</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="techExpertise">Technical Expertise</label>
+                    <select id="techExpertise" required>
+                        <option value="">Select your technical level</option>
+                        <option value="beginner">Beginner - Basic computer user</option>
+                        <option value="intermediate">Intermediate - Comfortable with technology</option>
+                        <option value="advanced">Advanced - IT professional or tech enthusiast</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>How helpful was the AI assistance?</label>
+                    <div class="rating-buttons">
+                        <button type="button" class="rating-btn" data-value="1">1 - Not helpful</button>
+                        <button type="button" class="rating-btn" data-value="2">2</button>
+                        <button type="button" class="rating-btn" data-value="3">3 - Neutral</button>
+                        <button type="button" class="rating-btn" data-value="4">4</button>
+                        <button type="button" class="rating-btn" data-value="5">5 - Very helpful</button>
+                    </div>
+                    <input type="hidden" id="aiHelpfulness" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Would you trust AI for email filtering?</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="trustAI" value="yes" required>
+                            <span class="radio-checkmark"></span>
+                            Yes, I would trust AI
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="trustAI" value="no">
+                            <span class="radio-checkmark"></span>
+                            No, I prefer human judgment
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="trustAI" value="sometimes">
+                            <span class="radio-checkmark"></span>
+                            Sometimes, with human oversight
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="userFeedback">Additional Feedback (Optional)</label>
+                    <textarea id="userFeedback" placeholder="Any comments about the study, AI predictions, or suggestions for improvement..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary">Submit & See Results</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Results Dashboard -->
+    <div id="resultsScreen" class="screen">
+        <div class="container">
+            <div class="results-header">
+                <h2>🎉 Study Complete!</h2>
+                <p>Thank you for participating in our research</p>
+            </div>
+
+            <div class="results-stats">
+                <div class="stat-card">
+                    <div class="stat-value" id="userAccuracy">85%</div>
+                    <div class="stat-label">Your Accuracy</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="aiAccuracy">92%</div>
+                    <div class="stat-label">AI Accuracy</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="agreementRate">78%</div>
+                    <div class="stat-label">Agreement Rate</div>
+                </div>
+            </div>
+
+            <div class="results-details">
+                <h3>Performance Summary</h3>
+                <div id="performanceBreakdown" class="performance-breakdown">
+                    <!-- Performance details will be filled here -->
+                </div>
+            </div>
+
+            <div class="results-actions">
+                <button id="downloadDataBtn" class="btn-secondary">
+                    📥 Download My Data (Backup)
+                </button>
+                <button id="newSessionBtn" class="btn-primary">
+                    🔄 Start New Test Session
+                </button>
+            </div>
+
+            <div class="research-note">
+                <p><strong>Research Note:</strong> Your anonymous responses have been recorded and will contribute to cybersecurity research. The AI model continues to learn from diverse human decisions.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+     <script src="config.js"></script>
+    <script src="google_sheets.js"></script>
+    <script src="preprocessor.js"></script>
+    <!-- Optional: Uncomment to use ONNX model -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script> -->
+    <script src="phishguard_model.js"></script>
+    <script src="app.js"></script>
+
+
+</body>
+</html>

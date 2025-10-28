@@ -1,0 +1,32 @@
+PHISHGUARD - IMPROVED MODEL TRAINING REPORT
+============================================================
+
+Training completed: 2025-10-27 19:53:15
+Training time: 127.12 seconds
+Epochs trained: 13
+
+CLASS BALANCING:
+  Class weights - Safe: 1.1308, Phishing: 0.8963
+  Training sampler: WeightedRandomSampler
+
+FINAL PERFORMANCE:
+  Accuracy:  0.9671
+  Precision: 0.9764
+  Recall:    0.9643
+  F1-Score:  0.9703
+
+CONFUSION MATRIX:
+  True Negatives (Safe correctly identified):  3360
+  False Positives (Safe misclassified as Phishing): 102
+  False Negatives (Phishing misclassified as Safe): 156
+  True Positives (Phishing correctly identified): 4213
+
+CLASSIFICATION REPORT:
+                precision    recall  f1-score   support
+
+    Safe Email       0.96      0.97      0.96      3462
+Phishing Email       0.98      0.96      0.97      4369
+
+      accuracy                           0.97      7831
+     macro avg       0.97      0.97      0.97      7831
+  weighted avg       0.97      0.97      0.97      7831

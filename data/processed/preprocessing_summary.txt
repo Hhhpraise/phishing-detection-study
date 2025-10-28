@@ -1,0 +1,25 @@
+PHISHGUARD - DATA PREPROCESSING SUMMARY
+==================================================
+
+Original dataset size: 39,154 emails
+Training set: 31,323 emails
+Test set: 7,831 emails
+TF-IDF features: 5,000
+Engineered features: 10
+Total features: 5,010
+
+TRAINING SET DISTRIBUTION:
+  Phishing emails: 17473 (55.78%)
+  Safe emails: 13850 (44.22%)
+
+FEATURES CREATED:
+  • email_length
+  • word_count
+  • url_count
+  • has_urls
+  • urgent_word_count
+  • has_urgent_words
+  • money_word_count
+  • has_money_words
+  • exclamation_count
+  • question_count
