@@ -536,7 +536,6 @@ async init() {
             console.log('✅ Data saved to localStorage backup');
 
             // Show message to user
-            this.showTemporaryMessage('Data saved locally (Google Sheets unavailable)', 'info');
             return true;
         } catch (error) {
             console.error('Error saving to localStorage:', error);

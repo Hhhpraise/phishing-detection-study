@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PhishGuard - Human vs AI Phishing Detection Study</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- TensorFlow.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.11.0/dist/tf.min.js"></script>
 </head>
 <body>
     <!-- Loading Screen -->
@@ -73,7 +71,7 @@
     <!-- Instructions Screen -->
     <div id="instructionsScreen" class="screen">
         <div class="container">
-            <h2>Study Instructions</h2>
+            <h2 style="text-align: center; margin-bottom: 2rem; font-size: clamp(1.8rem, 4vw, 2.2rem);">Study Instructions</h2>
 
             <div class="instructions-content">
                 <div class="instruction-section">
@@ -217,11 +215,11 @@
                 <div class="confidence-section">
                     <label for="confidenceSlider">How confident are you?</label>
                     <div class="confidence-labels">
-                        <span>1 - Guess</span>
-                        <span>2 - Unsure</span>
-                        <span>3 - Somewhat</span>
-                        <span>4 - Confident</span>
-                        <span>5 - Very Sure</span>
+                        <span>1<br>Guess</span>
+                        <span>2<br>Unsure</span>
+                        <span>3<br>Somewhat</span>
+                        <span>4<br>Confident</span>
+                        <span>5<br>Very Sure</span>
                     </div>
                     <input type="range" id="confidenceSlider" min="1" max="5" value="3" class="slider">
                     <div class="confidence-display">
@@ -268,8 +266,8 @@
     <!-- Post-Test Survey -->
     <div id="surveyScreen" class="screen">
         <div class="container">
-            <h2>Post-Study Survey</h2>
-            <p>Please help us improve by answering a few questions.</p>
+            <h2 style="text-align: center; margin-bottom: 1rem; font-size: clamp(1.8rem, 4vw, 2.2rem);">Post-Study Survey</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: var(--text-secondary);">Please help us improve by answering a few questions.</p>
 
             <form id="surveyForm" class="survey-form">
                 <div class="form-group">
@@ -312,17 +310,14 @@
                     <div class="radio-group">
                         <label class="radio-option">
                             <input type="radio" name="trustAI" value="yes" required>
-                            <span class="radio-checkmark"></span>
                             Yes, I would trust AI
                         </label>
                         <label class="radio-option">
                             <input type="radio" name="trustAI" value="no">
-                            <span class="radio-checkmark"></span>
                             No, I prefer human judgment
                         </label>
                         <label class="radio-option">
                             <input type="radio" name="trustAI" value="sometimes">
-                            <span class="radio-checkmark"></span>
                             Sometimes, with human oversight
                         </label>
                     </div>
@@ -369,11 +364,20 @@
             </div>
 
             <div class="results-actions">
+                <button id="shareBtn" class="btn-share">
+                    🔗 Share This Study
+                </button>
+                <a href="https://hhhpraise.github.io/portfolio" target="_blank" rel="noopener noreferrer" class="btn-portfolio">
+                    👤 View Portfolio
+                </a>
+            </div>
+
+            <div class="results-actions">
                 <button id="downloadDataBtn" class="btn-secondary">
-                    📥 Download My Data (Backup)
+                    📥 Download My Data
                 </button>
                 <button id="newSessionBtn" class="btn-primary">
-                    🔄 Start New Test Session
+                    🔄 Take Test Again
                 </button>
             </div>
 
@@ -383,7 +387,7 @@
         </div>
     </div>
 
-    <!-- Scripts -->
+     <!-- Scripts -->
      <script src="config.js"></script>
     <script src="google_sheets.js"></script>
     <script src="preprocessor.js"></script>
@@ -391,7 +395,5 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script> -->
     <script src="phishguard_model.js"></script>
     <script src="app.js"></script>
-
-
 </body>
 </html>
