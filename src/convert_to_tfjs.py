@@ -16,7 +16,7 @@ import os
 MODEL_PATH = "../models/phishing_model_improved.pth"
 VECTORIZER_PATH = "../models/tfidf_vectorizer.pkl"
 FEATURE_INFO_PATH = "../models/feature_info.pkl"
-OUTPUT_DIR = "../web/model/"
+OUTPUT_DIR = "../model/"
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
